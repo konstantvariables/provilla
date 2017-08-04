@@ -1,0 +1,43 @@
+/* You can add global styles to this file, and also import other style files */
+
+.purple-color {
+  color: #4C3494 !important;
+}
+
+.navbar-collapse a {
+  color: #4C3494 !important;
+}
+
+.form-content::-webkit-input-placeholder { color: #4C3494; }  /* WebKit, Blink, Edge */
+.form-content:-moz-placeholder { color: #4C3494; }  /* Mozilla Firefox 4 to 18 */
+.form-content::-moz-placeholder { color: #4C3494; }  /* Mozilla Firefox 19+ */
+.form-content:-ms-input-placeholder { color: #4C3494; }  /* Internet Explorer 10-11 */
+.form-content:-ms-input-placeholder { color: #4C3494; }  /* Microsoft Edge */
+
+.form-content input::placeholder {
+  color: #4C3494 !important;
+}
+
+.signup-margin {
+  margin-top: 20px;
+}
+
+h1 {
+  color: #4C3494 !important;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.icon-red {
+  color: #c0392b;
+}
+
+.icon-green {
+  color: #16a085;
+}
+
+.icon-orange {
+  color: #f39c12;
+}

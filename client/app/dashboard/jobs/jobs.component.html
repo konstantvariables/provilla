@@ -1,0 +1,106 @@
+<!-- <app-page-header [heading]="'Jobs'" [icon]="'fa-jobs'"></app-page-header> -->
+
+<app-loading [condition]="isLoading"></app-loading>
+
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="row">
+    <div class="col col-xl-12 col-lg-12">
+        <div class="card" *ngIf="!isLoading">
+            <h4 class="card-header">Cleaning Jobs
+
+                <ng-template #content let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add new job</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <form [formGroup]="addJobForm" (ngSubmit)="addJob()" role="form">
+
+                        <div class="modal-body">
+                          <div class="card-block">
+                            <fieldset class="form-group">
+                              <input class="form-control" type="text" name="name" formControlName="name" placeholder="Name">
+                            </fieldset>
+                            <fieldset class="form-group">
+                              <input class="form-control" type="text" name="detail" formControlName="detail" placeholder="Detail" min="0">
+                            </fieldset>
+                            <fieldset class="form-group">
+                              <select class="form-control" name="priority" formControlName="priority" placeholder="Priority">
+                                <option value="" selected disabled>Priority</option>
+                                <option value="urgent">Urgent</option>
+                                <option value="normal">Normal</option>
+                              </select>
+                            </fieldset>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit" [disabled]="!addJobForm.valid"><i class="fa fa-floppy-o"></i> Add</button>
+                            <button type="button" class="btn btn-secondary pull-right" (click)="c('Close click')">Close</button>
+                        </div>
+                    </form>
+                </ng-template>
+
+
+                <button *ngIf="canAdd" class="btn btn-sm btn-primary pull-right" (click)="open(content, options)">Post Job</button>
+            </h4>
+            <div class="card-block table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th colspan="3">Details</th>
+                            <th>Priority</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="jobs.length === 0">
+                        <tr>
+                            <td colspan="6" *ngIf="isCleaner">Currently no jobs are available.</td>
+                            <td colspan="6" *ngIf="isOwner">No jobs are added yet. Please post a new job.</td>
+                          <td colspan="6" *ngIf="isAdmin">No jobs posted by any property owner yet.</td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="!isEditing">
+                        <tr *ngFor="let job of jobs">
+                            <td>{{job.name}}</td>
+                            <td colspan="3">{{job.detail}}</td>
+                            <td class="capitalize">{{job.priority}}</td>
+                            <td>
+                                <button *ngIf="canAdd" class="btn btn-sm btn-link" (click)="enableEditing(job)"><i class="fa fa-pencil"></i> Edit</button>
+                                <button *ngIf="canAdd" class="btn btn-sm btn-link" (click)="deleteJob(job)"><i class="fa fa-trash"></i> Delete</button>
+                                <button *ngIf="!canAdd" class="btn btn-sm btn-link" (click)="acceptJob(job)"> Accept</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="isEditing">
+                        <tr>
+                            <td colspan="4">
+                                <div class="row">
+                                    <div class="col col-xl-12 col-lg-12">
+                                        <form class="form-inline" #form="ngForm" (ngSubmit)="editJob(job)">
+                                            <fieldset class="form-group col-xl-3 col-lg-3">
+                                                <input class="form-control" type="text" name="name" [(ngModel)]="job.name" placeholder="Name" required>
+                                            </fieldset>
+                                            <fieldset class="form-group col-xl-3 col-lg-3">
+                                                <input class="form-control" type="text" name="detail" [(ngModel)]="job.detail" placeholder="Detail" min="0" required>
+                                            </fieldset>
+                                            <fieldset class="form-group col-xl-3 col-lg-3">
+                                              <select class="form-control" name="priority" [(ngModel)]="job.priority" placeholder="Priority" required>
+                                                <option value="" selected disabled>Priority</option>
+                                                <option value="urgent">Urgent</option>
+                                                <option value="normal">Normal</option>
+                                              </select>
+                                            </fieldset>
+                                            <fieldset class="col-xl-3 col-lg-3">
+                                                <button class="btn btn-sm btn-link" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Save</button>
+                                                <button class="btn btn-sm btn-link" (click)="cancelEditing()"><i class="fa fa-times"></i> Cancel</button>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>

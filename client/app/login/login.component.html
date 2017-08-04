@@ -1,0 +1,27 @@
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="login-page" [@routerTransition]>
+    <div class="row">
+        <div class="col-md-4 push-md-4">
+            <h1>Login</h1>
+            <form role="form" [formGroup]="loginForm" (ngSubmit)="onLoggedin()">
+                <div class="form-content">
+                    <div class="form-group">
+                        <input type="email" name="email" formControlName="email" placeholder="Email" autofocus class="form-control input-underline input-lg">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" name="password" formControlName="password" placeholder="Password" class="form-control input-underline input-lg">
+                    </div>
+                </div>
+              <button type="submit" class="btn btn-lg btn-primary" style="" [disabled]="!loginForm.valid">Login</button>
+            </form>
+        </div>
+    </div>
+  <div class="row">
+    <div class="col-md-4 push-md-4 signup-margin">
+    <span class="purple-color">Don't have an account?</span>
+    <a [routerLink]="['/signup']">Sign Up</a>
+    </div>
+  </div>
+</div>

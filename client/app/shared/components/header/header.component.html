@@ -1,0 +1,18 @@
+<div class="pos-f-t fixed-top header">
+    <nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md">
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto mt-2 mt-md-0">
+                <li class="nav-item dropdown" ngbDropdown>
+                    <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
+                        <i class="fa fa-user"></i> {{auth.currentUser.username |titleCase}} <b class="caret"></b>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" [routerLink]="['/account']">Settings</a>
+                        <hr/>
+                        <a class="dropdown-item" [routerLink]="['/logout']">Sign Out</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

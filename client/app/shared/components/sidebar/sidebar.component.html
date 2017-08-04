@@ -1,0 +1,47 @@
+
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+  <button class="navbar-toggler navbar-toggler-right" (click)="toggleSidebar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand purple-color app-brand" href="javascript:void(0)">Provilla</a>
+  <div class="clearfix"></div>
+  <small class="app-brand capitalize">( {{ userRole }} )</small>
+  <hr/>
+    <ul class="list-group">
+        <!-- <a *ngIf="!auth.isCleaner" routerLink="/about" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard icon-red"></i>&nbsp;{{ 'home' | translate }}
+        </a> -->
+        <a [routerLink]="['/jobs']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-bar-chart-o icon-green"></i>&nbsp;{{ 'jobs' | translate }}
+        </a>
+        <!--<a [routerLink]="['/account']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-table"></i>&nbsp;{{ 'account' | translate }}
+        </a>-->
+        <a *ngIf="auth.isAdmin" [routerLink]="['/users']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-table icon-orange"></i>&nbsp;{{ 'Users' | translate }}
+        </a>
+
+        <!--<div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('pages')">
+                <span><i class="fa fa-plus"></i>&nbsp; {{ 'menu' | translate }}</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'pages'">
+                <ul class="submenu">
+                    <li>
+                        <a href="javascript:void(0)"><span>{{ 'submenu item 1' | translate }}</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><span>{{ 'submenu item 2' | translate }}</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><span>{{ 'submenu item 3' | translate }}</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <a [routerLink]="['/blank-page']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-file-o"></i>&nbsp;{{ 'blankpage' | translate }}
+        </a>-->
+
+    </ul>
+</nav>

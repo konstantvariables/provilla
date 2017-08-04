@@ -1,0 +1,38 @@
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="login-page" [@routerTransition]>
+    <div class="row">
+        <div class="col-md-4 push-md-4">
+            <h1>Create Account</h1>
+            <form role="form" [formGroup]="registerForm" (ngSubmit)="register()">
+                <div class="form-content">
+                    <div class="form-group" [ngClass]="setClassUsername()">
+                        <input type="text" name="username" formControlName="username" placeholder="Full Name" autofocus class="form-control input-underline input-lg">
+                    </div>
+                    <div class="form-group" [ngClass]="setClassEmail()">
+                        <input type="email" name="email" formControlName="email" placeholder="Email" class="form-control input-underline input-lg">
+                    </div>
+                    <div class="form-group" [ngClass]="setClassPassword()">
+                        <input type="password" name="password" formControlName="password" placeholder="Password" class="form-control input-underline input-lg">
+                    </div>
+                    <div class="form-group">
+                        <select name="role" formControlName="role" class="form-control input-underline input-lg">
+                          <option value="" selected disabled>Role</option>
+                          <option value="owner">Property Owner</option>
+                          <option value="cleaner">Cleaner</option>
+                          <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                </div>
+              <button class="btn btn-lg btn-primary" type="submit" [disabled]="!registerForm.valid">Register</button> &nbsp;
+            </form>
+        </div>
+    </div>
+  <div class="row">
+    <div class="col-md-4 push-md-4 signup-margin">
+      <span class="purple-color">Already have Provilla account?</span>
+      <a [routerLink]="['/login']"> Log in </a>
+    </div>
+  </div>
+
+</div>
